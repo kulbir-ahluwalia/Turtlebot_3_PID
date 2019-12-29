@@ -39,6 +39,12 @@ Run final.py by going into:-
 Install these packages:-
 ```
 sudo apt-get install ros-kinetic-teleop-twist-keyboard  
+sudo apt-get install ros-kinetic-turtlebot3
+sudo apt-get install ros-kinetic-joy ros-kinetic-joystick-drivers ros-kinetic-teleop-twist-joy
+```
+Source the catkin workspace:-
+```
+source devel/setup.bash
 ```
 
 Then, export the type of Turtlebot3 that you want.
