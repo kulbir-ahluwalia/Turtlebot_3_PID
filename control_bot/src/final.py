@@ -24,7 +24,8 @@ from math import radians, copysign, sqrt, pow, pi, atan2
 from tf.transformations import euler_from_quaternion
 import numpy as np
 import subprocess
-
+import os
+import time
 
 msg = """
 control your Turtlebot3!
@@ -196,11 +197,15 @@ if __name__ == '__main__':
     y_input = final_position[1]
     z_input = final_position[2]
 
+    caller = 'roslaunch control_bot gazebo_user.launch x_pos:={0} y_pos:={1} z_pos:={2}'.format(str(initial_position[0]), str(initial_position[1]), str(0))
+
+    print(caller)
     try:
-        subprocess.run(["roslaunch control_bot gazebo_user.launch", initial_position[0], initial_position[1], initial_position[2]])
+        subprocess.Popen(caller,shell=True,stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        print("subprocess")
+        time.sleep(5)
         while not rospy.is_shutdown():
             GotoPoint()
 
     except:
         rospy.loginfo("shutdown program.")
-
