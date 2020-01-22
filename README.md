@@ -29,13 +29,6 @@ cd ~/catkin_ws && catkin_make
 
 Reference - ROS Robot Programming book - Page 285 - https://www.pishrobot.com/wp-content/uploads/2018/02/ROS-robot-programming-book-by-turtlebo3-developers-EN.pdf
 
-Run final.py by going into:-
-```
-~/catkin_ws/src/Turtlebot3/control_bot/src$
-```
-
-
-
 Install these packages:-
 ```
 sudo apt-get install ros-kinetic-teleop-twist-keyboard  
@@ -55,6 +48,10 @@ export TURTLEBOT3_MODEL=burger #for burger
 To open empty world in gazebo with Turtlebot3 in it:-
 ```
 roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch  
+```
+Run final.py by going into:-
+```
+~/catkin_ws/src/Turtlebot3/control_bot/src$
 ```
 
 
