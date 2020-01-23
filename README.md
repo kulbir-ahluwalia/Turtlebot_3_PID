@@ -56,11 +56,11 @@ We can move the turtlebot by:-
 
 ### By publishing to the topic /cmd_vel
 1. To control the velocity of the robot, we publish to the topic **/cmd_vel**. 
-2. Use the command **rostopic info /cmd_vel_mux/input/teleop** to see the type of message required to be sent to the topic, the publishers to the topic and the subscribers to the topic.
+2. Use the command **rostopic info /cmd_vel** to see the type of message required to be sent to the topic, the publishers to the topic and the subscribers to the topic.
 3. Use **rosmsg show geometry_msgs/Twist** to see the details of the message type.
 4. Then use the command to enter the velocities manually:-
 ```
-rostopic pub /cmd_vel_mux/input/teleop geometry_msgs/Twist "linear:
+rostopic pub /cmd_vel geometry_msgs/Twist "linear:
   x: 0.0
   y: 0.0
   z: 0.0
@@ -68,6 +68,12 @@ angular:
   x: 0.0
   y: 0.0
   z: 0.0"
+```
+### By controlling the robot using the keyboard 
+We can use the  keyboard_teleop.launch file to control the Turtlebot 3 using inputs from the keyboard using the commands:-
+```
+export TURTLEBOT3_MODEL=burger #for burger
+roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch
 ```
 
 Run final.py by going into:-
