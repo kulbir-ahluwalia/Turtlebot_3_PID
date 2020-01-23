@@ -49,10 +49,35 @@ To open empty world in gazebo with Turtlebot3 in it:-
 ```
 roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch  
 ```
+## Moving the Turtlebot
+We can move the turtlebot by:-
+1. Publishing to the concerned topics
+2. Using teleop.launch which takes inputs from the user using the keyboard.
+
+### By publishing to the topic /cmd_vel
+1. To control the velocity of the robot, we publish to the topic **/cmd_vel**. 
+2. Use the command **rostopic info /cmd_vel_mux/input/teleop** to see the type of message required to be sent to the topic, the publishers to the topic and the subscribers to the topic.
+3. Use **rosmsg show geometry_msgs/Twist** to see the details of the message type.
+4. Then use the command to enter the velocities manually:-
+```
+rostopic pub /cmd_vel_mux/input/teleop geometry_msgs/Twist "linear:
+  x: 0.0
+  y: 0.0
+  z: 0.0
+angular:
+  x: 0.0
+  y: 0.0
+  z: 0.0"
+```
+
 Run final.py by going into:-
 ```
 ~/catkin_ws/src/Turtlebot3/control_bot/src$
 ```
+
+## References:-
+1. Robot Ignite Academy: Mastering with ROS: Turtlebot3
+2. ROS Robot Programming book - Page 285 - https://www.pishrobot.com/wp-content/uploads/2018/02/ROS-robot-programming-book-by-turtlebo3-developers-EN.pdf
 
 
 
