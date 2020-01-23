@@ -75,6 +75,8 @@ We can use the  keyboard_teleop.launch file to control the Turtlebot 3 using inp
 export TURTLEBOT3_MODEL=burger #for burger
 roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch
 ```
+You will get the following menu:-
+<img src= "turtlebot3_teleop.png" class="img-responsive" alt=""> </div>
 
 
 
