@@ -1,4 +1,4 @@
-# Turtlebot3
+# Turtlebot_3_PID
 ROS package to simulate Turtlebot 3 Waffle/ Burger in Gazebo. The turtlebot starts at a random position and goes to the goal position input by the user.
 
 The following packages need to be installed first:-
