@@ -24,7 +24,7 @@ git clone https://github.com/ROBOTIS-GIT/turtlebot3_applications.git
 
 Change the working directory to catkin_ws and then use catkin_make:-
 ```
-cd ~/catkin_ws && catkin_make 
+cd ~/catkin_ws && catkin_make
 ```
 
 Reference - ROS Robot Programming book - Page 285 - https://www.pishrobot.com/wp-content/uploads/2018/02/ROS-robot-programming-book-by-turtlebo3-developers-EN.pdf
@@ -35,10 +35,15 @@ sudo apt-get install ros-kinetic-teleop-twist-keyboard
 sudo apt-get install ros-kinetic-turtlebot3
 sudo apt-get install ros-kinetic-joy ros-kinetic-joystick-drivers ros-kinetic-teleop-twist-joy
 ```
-Source the catkin workspace:-
+To source the catkin workspace if you're using bash:-
 ```
 source devel/setup.bash
 ```
+To source the catkin workspace if you're using zsh:-
+```
+source ~/catkin_ws/devel/setup.zsh
+```
+
 
 Then, export the type of Turtlebot3 that you want.
 ```
