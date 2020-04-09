@@ -13,14 +13,12 @@ cd ~/catkin_ws/src/
 ```
 
 Then, clone the following repositories into your workspace:-
-```
- 
-
+```zsh
 git clone https://github.com/ROBOTIS-GIT/turtlebot3.git
 git clone https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git  
 git clone https://github.com/ROBOTIS-GIT/turtlebot3_applications_msgs.git  
 git clone https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git 
-git clone https://github.com/ROBOTIS-GIT/turtlebot3_applications.git  
+#git clone https://github.com/ROBOTIS-GIT/turtlebot3_applications.git  
 ```
 
 Change the working directory to catkin_ws and then use catkin_make:-
