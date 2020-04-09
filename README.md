@@ -15,10 +15,11 @@ cd ~/catkin_ws/src/
 Then, clone the following repositories into your workspace:-
 ```
  
-git clone https://github.com/ROBOTIS-GIT/turtlebot3.git   
-git clone https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git   
+
+git clone https://github.com/ROBOTIS-GIT/turtlebot3.git
+git clone https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git  
 git clone https://github.com/ROBOTIS-GIT/turtlebot3_applications_msgs.git  
-git clone https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git  
+git clone https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git 
 git clone https://github.com/ROBOTIS-GIT/turtlebot3_applications.git  
 ```
 
