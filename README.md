@@ -1,4 +1,4 @@
-# Turtlebot_3_PID for ROS melodic
+# Turtlebot_3_PID
 ROS package to simulate Turtlebot 3 Waffle/ Burger in Gazebo. The turtlebot starts at a random position and goes to the goal position input by the user.
 
 # Running instructions
@@ -13,12 +13,20 @@ To run the python file, do:
 
 ```bash
 source ~/catkin_ws/devel/setup.bash
+#to make the python file executable:-
+cd ~/catkin_ws/src/control_bot/src/Scripts
+chmod +x final.py 
+#then run the python file:-
 rosrun control_bot final.py
 ```
 Note- The command ```roslaunch control_bot gazebo_user.launch x_pos:={0} y_pos:={1} z_pos:={2}```
 is executed by using ```subprocess.Popen``` in the python code file "final.py".
 
-# Installation of required packages
+
+
+
+
+# Installation of required packages for ROS Melodic
 The following packages need to be installed first:-
 ```
 $ sudo apt-get install ros-melodic-ar-track-alvar
@@ -112,7 +120,7 @@ Run final.py by going into:-
 
 
 
-# Turtlebot_3_PID for ROS kinetic
+# Installation of required packages for ROS kinetic
 ROS package to simulate Turtlebot 3 Waffle/ Burger in Gazebo. The turtlebot starts at a random position and goes to the goal position input by the user.
 
 The following packages need to be installed first:-
