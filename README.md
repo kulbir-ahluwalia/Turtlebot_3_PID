@@ -8,12 +8,11 @@ cd ~/your_workspace
 # our workspace in this case is the "catkin_ws"
 catkin_make
 ```
-To launch the turtlebot 3:-
+To launch roscore:-
 ```zsh
 #source ~/catkin_ws/devel/setup.bash #for bash users
 source ~/catkin_ws/devel/setup.zsh
-export TURTLEBOT3_MODEL=waffle #for waffle  
-roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch  
+roscore 
 ```
 
 To run the python file, do:
