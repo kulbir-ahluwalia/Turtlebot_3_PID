@@ -24,6 +24,7 @@ cd ~/catkin_ws/src/control_bot/src/Scripts
 chmod +x final.py 
 #then run the python file:-
 rosrun control_bot final.py
+rosrun control_bot PID_test1.py
 ```
 Enter the ranges for generating the random start and end poses. 
 Note- The command ```roslaunch control_bot gazebo_user.launch x_pos:={0} y_pos:={1} z_pos:={2}```
