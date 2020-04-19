@@ -18,7 +18,8 @@ roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch
 
 To run the python file, do:
 ```zsh
-source ~/catkin_ws/devel/setup.bash
+#source ~/catkin_ws/devel/setup.bash #for bash users
+source ~/catkin_ws/devel/setup.zsh
 #to make the python file executable:-
 cd ~/catkin_ws/src/control_bot/src/Scripts
 chmod +x final.py 
