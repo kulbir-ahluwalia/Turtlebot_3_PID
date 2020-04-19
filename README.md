@@ -4,23 +4,17 @@ ROS package to simulate Turtlebot 3 Waffle/ Burger in Gazebo. The turtlebot star
 # Running instructions
 First of all, copy the package control_bot in the src folder of your workspace. Then do:
 ```bash
-rosrun control_bot ```final.py```
+cd ~/your_workspace
+catkin_make
 ```
-```final.py```  
-Press ```Ctrl```+```T```
-
+Enter the ranges for generating the random start and end poses. 
 To run the python file, do:
-```zsh
-rosrun 
+
+```bash
+rosrun control_bot final.py
 ```
-
-
-
-
-
-
-
-
+Note- The command ```roslaunch control_bot gazebo_user.launch x_pos:={0} y_pos:={1} z_pos:={2}```
+is executed by using ```subprocess.Popen``` in the python code file "final.py".
 
 # Installation of required packages
 The following packages need to be installed first:-
