@@ -8,10 +8,16 @@ cd ~/your_workspace
 # our workspace in this case is the "catkin_ws"
 catkin_make
 ```
-Enter the ranges for generating the random start and end poses. 
-To run the python file, do:
+To launch the turtlebot 3:-
+```zsh
+#source ~/catkin_ws/devel/setup.bash #for bash users
+source ~/catkin_ws/devel/setup.zsh
+export TURTLEBOT3_MODEL=waffle #for waffle  
+roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch  
+```
 
-```bash
+To run the python file, do:
+```zsh
 source ~/catkin_ws/devel/setup.bash
 #to make the python file executable:-
 cd ~/catkin_ws/src/control_bot/src/Scripts
@@ -19,6 +25,7 @@ chmod +x final.py
 #then run the python file:-
 rosrun control_bot final.py
 ```
+Enter the ranges for generating the random start and end poses. 
 Note- The command ```roslaunch control_bot gazebo_user.launch x_pos:={0} y_pos:={1} z_pos:={2}```
 is executed by using ```subprocess.Popen``` in the python code file "final.py".
 
