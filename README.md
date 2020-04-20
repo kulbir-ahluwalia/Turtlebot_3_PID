@@ -164,6 +164,7 @@ Install these packages:-
 sudo apt-get install ros-kinetic-teleop-twist-keyboard  
 sudo apt-get install ros-kinetic-turtlebot3
 sudo apt-get install ros-kinetic-joy ros-kinetic-joystick-drivers ros-kinetic-teleop-twist-joy
+sudo apt-get install ros-kinetic-turtlebot-bringup ros-kinetic-turtlebot-navigation ros-kinetic-rtabmap-ros
 ```
 To source the catkin workspace if you're using bash:-
 ```
