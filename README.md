@@ -1,6 +1,8 @@
 # Turtlebot_3_PID
 ROS package to simulate Turtlebot 3 Waffle/ Burger in Gazebo. The turtlebot starts at a random position and goes to the goal position input by the user.
 
+YouTube video explanation: https://youtu.be/znWkFWk76XQ
+
 # Running instructions
 First of all, copy the package control_bot in the src folder of your workspace. Then do:
 ```bash
