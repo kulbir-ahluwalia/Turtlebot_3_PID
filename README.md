@@ -12,7 +12,8 @@ To launch roscore:-
 ```zsh
 #source ~/catkin_ws/devel/setup.bash #for bash users
 source ~/catkin_ws/devel/setup.zsh
-roscore 
+export TURTLEBOT3_MODEL=waffle #for waffle
+roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch
 ```
 
 To run the python file, do:
@@ -24,15 +25,13 @@ cd ~/catkin_ws/src/control_bot/Scripts
 chmod +x final.py 
 #then run the python file:-
 rosrun control_bot final.py
-rosrun control_bot PID_test1.py
+#rosrun control_bot PID_test1.py   #only if you want to test it
 ```
-Enter the ranges for generating the random start and end poses. 
-Note- The command ```roslaunch control_bot gazebo_user.launch x_pos:={0} y_pos:={1} z_pos:={2}```
-is executed by using ```subprocess.Popen``` in the python code file "final.py".
+Enter the ranges for generating the random start and end poses. The turtlebot will go to the goal position using a PID controller.
 
 
-
-
+Note for an older version - The command ```roslaunch control_bot gazebo_user.launch x_pos:={0} y_pos:={1} z_pos:={2}```
+is executed by using ```subprocess.Popen``` in the python code file "final.py" in the src folder of control_bot.
 
 # Installation of required packages for ROS Melodic
 The following packages need to be installed first:-
