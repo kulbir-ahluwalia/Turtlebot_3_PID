@@ -20,7 +20,7 @@ To run the python file, do:
 #source ~/catkin_ws/devel/setup.bash #for bash users
 source ~/catkin_ws/devel/setup.zsh
 #to make the python file executable:-
-cd ~/catkin_ws/src/control_bot/src/Scripts
+cd ~/catkin_ws/src/control_bot/Scripts
 chmod +x final.py 
 #then run the python file:-
 rosrun control_bot final.py
