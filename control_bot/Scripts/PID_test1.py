@@ -9,18 +9,18 @@ import numpy as np
 import subprocess
 import os
 import time
-import math 
-from gazebo_msgs.msg import ModelState
-from gazebo_msgs.srv import SetModelState
-from tf.transformations import quaternion_from_euler
 
-kp_distance = 1
-ki_distance = 0.01
-kd_distance = 0.5
+msg = """
+control your Turtlebot3!
+-----------------------
+Insert xyz - coordinate.
+x : position x (m)
+y : position y (m)
+z : orientation z (degree: -180 ~ 180)
+If you want to close, insert 's'
+-----------------------
+"""
 
-kp_angle = 1
-ki_angle = 0.03
-kd_angle = 0.05
 
 class GotoPoint():
     def __init__(self):
@@ -45,34 +45,21 @@ class GotoPoint():
                 rospy.signal_shutdown("tf Exception")
 
         (position, rotation) = self.get_odom()
-
-
         last_rotation = 0
-        linear_speed = 1    #kp_distance
-        angular_speed = 1  #kp_angular
-
-
+        linear_speed = 1
+        angular_speed = 1
         (goal_x, goal_y, goal_z) = self.getkey()
         if goal_z > 180 or goal_z < -180:
             print("you input wrong z range.")
             self.shutdown()
         goal_z = np.deg2rad(goal_z)
- 
         goal_distance = sqrt(pow(goal_x - position.x, 2) + pow(goal_y - position.y, 2))
-        #distance is the error for length, x,y
         distance = goal_distance
-        previous_distance = 0
-        total_distance = 0
-
-        previous_angle = 0
-        total_angle = 0
-       
 
         while distance > 0.05:
             (position, rotation) = self.get_odom()
             x_start = position.x
             y_start = position.y
-            #path_angle = error
             path_angle = atan2(goal_y - y_start, goal_x- x_start)
 
             if path_angle < -pi/4 or path_angle > pi/4:
@@ -84,20 +71,10 @@ class GotoPoint():
                 rotation = 2*pi + rotation
             elif last_rotation < -pi+0.1 and rotation > 0:
                 rotation = -2*pi + rotation
-
-
-            diff_angle = path_angle - previous_angle
-            diff_distance = distance - previous_distance
+            move_cmd.angular.z = angular_speed * path_angle-rotation
 
             distance = sqrt(pow((goal_x - x_start), 2) + pow((goal_y - y_start), 2))
-
-            control_signal_distance = kp_distance*distance + ki_distance*total_distance + kd_distance*diff_distance
-
-            control_signal_angle = kp_angle*path_angle + ki_angle*total_angle + kd_distance*diff_angle
-
-            move_cmd.angular.z = (control_signal_angle) - rotation
-            #move_cmd.linear.x = min(linear_speed * distance, 0.1)
-            move_cmd.linear.x = min(control_signal_distance, 0.1)
+            move_cmd.linear.x = min(linear_speed * distance, 0.1)
 
             if move_cmd.angular.z > 0:
                 move_cmd.angular.z = min(move_cmd.angular.z, 1.5)
@@ -107,14 +84,7 @@ class GotoPoint():
             last_rotation = rotation
             self.cmd_vel.publish(move_cmd)
             r.sleep()
-            previous_distance = distance
-            total_distance = total_distance + distance
-            print("Current positin and rotation are: ", (position, rotation))
-
         (position, rotation) = self.get_odom()
-        print("Current positin and rotation are: ", (position, rotation))
-
-        print("reached :)   ^_^")
 
         while abs(rotation - goal_z) > 0.05:
             (position, rotation) = self.get_odom()
@@ -136,9 +106,8 @@ class GotoPoint():
             r.sleep()
 
 
-        # rospy.loginfo("Stopping the robot...")
+        rospy.loginfo("Stopping the robot...")
         self.cmd_vel.publish(Twist())
-        return
 
     def getkey(self):
         global x_input, y_input, z_input
@@ -167,70 +136,61 @@ class GotoPoint():
         rospy.sleep(1)
 
 
+if __name__ == '__main__':
+
+    print("Please enter the lower range for generating x and y coordinates for the starting position of Turtlebot")
+    lower = input()
+
+    print("Please enter the upper range for generating x and y coordinates for the starting position of Turtlebot")
+    upper = input()
+
+    print("Random initial X and Y coordinates of the Turtlebot are:-")
+
+    coord = np.random.uniform(lower, upper, 2)
+    print('Initial X coordinate: ', coord[0])
+    print('Initial Y coordinate: ', coord[1])
+
+    print("Please enter the lower range for generating angle wrt x axis for the starting position of Turtlebot in degrees")
+    lower_angle = input()
+
+    print("Please enter the upper range for generating angle wrt x axis for the starting position of Turtlebot in degrees")
+    upper_angle = input()
+
+    angle = np.random.uniform(lower_angle, upper_angle, 1)
+    print('Initial starting angle Theta wrt +X axis: ', angle[0])
+
+    #initial_position = coord + angle
+    initial_position = np.concatenate((coord,angle))
+
+    # initial_position = (float(1),float(2),float(30))
+
+    #print('(X, Y, Theta):' ,coord[0], coord[1], angle[0])
+    print('Initial pose is:-')
+    print('(X, Y, Theta):', initial_position[0], initial_position[1], initial_position[2])
+    #
+    print("Enter final x position")
+    x_final = input()
+    print("Enter final y position")
+    y_final = input()
+    print("Enter final angle position")
+    angle_final = input()
 
 
-print("Please enter the lower range for generating x and y coordinates for the starting position of Turtlebot")
-lower = input()
 
-print("Please enter the upper range for generating x and y coordinates for the starting position of Turtlebot")
-upper = input()
-
-print("Random initial X and Y coordinates of the Turtlebot are:-")
-
-coord = np.random.uniform(lower, upper, 2)
-print('Initial X coordinate: ', coord[0])
-print('Initial Y coordinate: ', coord[1])
-
-print("Please enter the lower range for generating angle wrt x axis for the starting position of Turtlebot in degrees")
-lower_angle = math.radians(input())
-
-print("Please enter the upper range for generating angle wrt x axis for the starting position of Turtlebot in degrees")
-upper_angle = math.radians(input())
-
-angle = np.random.uniform(lower_angle, upper_angle, 1)   
-print('Initial starting angle Theta wrt +X axis: ', angle[0])   
-
-#initial_position = coord + angle
-initial_position = np.concatenate((coord,angle))
-
-#print('(X, Y, Theta):' ,coord[0], coord[1], angle[0])
-print('Initial pose is:-')
-print('(X, Y, Theta):', initial_position[0], initial_position[1], initial_position[2])
-
-print("Enter final x position")
-x_final = input()
-print("Enter final y position")
-y_final = input()
-print("Enter final angle position")
-angle_final = input()
-
-final = [x_final, y_final, angle_final]
-final_position = np.array(final)
-
-x_input = final_position[0]
-y_input = final_position[1]
-z_input = final_position[2]
+    # x_final = float(4)
+    # y_final = float(3)
+    # angle_final = float(40)
 
 
-q = quaternion_from_euler(0, 0, initial_position[2])
-# state_msg is an object
-state_msg = ModelState()
-state_msg.model_name = 'turtlebot3_waffle'
-state_msg.pose.position.x = initial_position[0]
-state_msg.pose.position.y = initial_position[1]
-state_msg.pose.position.z = 0
+    final = [x_final, y_final, angle_final]
+    final_position = np.array(final)
 
-state_msg.pose.orientation.x = q[0]
-state_msg.pose.orientation.y = q[1]
-state_msg.pose.orientation.z = q[2]
-state_msg.pose.orientation.w = q[3]
+    x_input = final_position[0]
+    y_input = final_position[1]
+    z_input = final_position[2]
 
-set_state = rospy.ServiceProxy('/gazebo/set_model_state', SetModelState)
-resp = set_state(state_msg)
-print(resp)
+    # caller = 'roslaunch control_bot gazebo_user.launch x_pos:={0} y_pos:={1} z_pos:={2}'.format(str(initial_position[0]), str(initial_position[1]), str(0))
 
-time.sleep(5)
 
-while not rospy.is_shutdown():
-    GotoPoint()
-
+    while not rospy.is_shutdown():
+        GotoPoint()
