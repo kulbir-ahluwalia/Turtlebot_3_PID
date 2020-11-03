@@ -229,6 +229,21 @@ Run final.py by going into:-
 ~/catkin_ws/src/Turtlebot3/control_bot/src$
 ```
 
+# Recording and playing rosbag files
+```
+#to record a rosbag file
+rosbag record -a
+
+#to play the rosbag file and see it in rviz
+#in first terminal
+rosparam set /use_sim_time "true"
+#toggle spacebar to play/pause the rosbag file
+rosbag play --pause -l --clock 2020-09-23-21-46-48.bag
+#in another terminal
+rviz rviz
+```
+
+
 ## References:-
 1. Robot Ignite Academy: Mastering with ROS: Turtlebot3
 2. ROS Robot Programming book - Page 285 - https://www.pishrobot.com/wp-content/uploads/2018/02/ROS-robot-programming-book-by-turtlebo3-developers-EN.pdf
