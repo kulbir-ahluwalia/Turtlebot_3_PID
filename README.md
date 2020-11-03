@@ -191,6 +191,13 @@ We can move the turtlebot by:-
 1. Publishing to the concerned topics
 2. Using teleop.launch which takes inputs from the user using the keyboard.
 
+### To display messages being published to a topic
+```
+rostopic echo /topic_name
+#for example, looking at /odom topic for odometry:
+rostopic echo /odom 
+```
+
 ### By publishing to the topic /cmd_vel
 1. To control the velocity of the robot, we publish to the topic **/cmd_vel**. 
 2. Use the command **rostopic info /cmd_vel** to see the type of message required to be sent to the topic, the publishers to the topic and the subscribers to the topic.
